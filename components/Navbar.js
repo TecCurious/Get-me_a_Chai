@@ -1,14 +1,17 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react"
-import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
-
+  const router = useRouter();
   const [showDown, setShowDown] = useState(false);
  
   const { data: session } = useSession()
+
+
+
  
   return (
     <nav className='flex bg-gray-900 justify-between items-center px-4 text-white md:h-16 flex-col md:flex-row'>
@@ -40,7 +43,7 @@ const Navbar = () => {
                 <Link href={`/${session.user.username}`} className="block px-4 py-2 hover:bg-slate-400 dark:hover:bg-gray-600 dark:hover:text-white">Your page</Link>
               </li>
               <li>
-                <Link href="#" onClick={() => { signOut()}} className="block px-4 py-2 hover:bg-slate-400 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</Link>
+                <Link href="#" onClick={()=>{signOut()}}  className="block px-4 py-2 hover:bg-slate-400 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</Link>
               </li>
             </ul>
           </div>
@@ -50,7 +53,7 @@ const Navbar = () => {
           <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">login</button>
         </Link>}
 
-        {session && <button onClick={() => { signOut();}} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-1">logout</button>}
+        {session && <button onClick={()=>{signOut()}} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-1">logout</button>}
       </div>
     </nav>
 

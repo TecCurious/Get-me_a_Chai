@@ -10,17 +10,19 @@ const authOptions = NextAuth({
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      scope: 'read:user user:email',
+      // scope: 'read:user user:email',
     }),
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account.provider === 'github') {
+        console.log(profile);
         // Ensure MongoDB connection
-        await mongoose.connect('mongodb://127.0.0.1:27017/chai', {
+        await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URL, {
+          
           useNewUrlParser: true,
           useUnifiedTopology: true,
-        });
+        }).then(console.log("db connected")).catch((err)=>{console.log("some error", err); return false });
 
         // Extract the email from the profile or emails array
         const email = profile.email || profile.email?.find(email => email.primary)?.email;

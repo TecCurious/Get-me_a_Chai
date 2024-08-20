@@ -7,7 +7,7 @@ import ConnectDb from "@/components/ConnectDb";
 
 export const initiate = async (amount, to_username, paymentForm) => {
   
-        await mongoose.connect('mongodb://127.0.0.1:27017/chai', {
+        await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });

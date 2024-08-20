@@ -16,7 +16,7 @@ const Login = () => {
           // Redirect to the desired page if the user is logged in
           router.push('/dashboard');
           toast("logedIn") 
-        }
+        } 
       }, [session, router]); // Re-run the effect if session or router changes
     
 

@@ -8,8 +8,10 @@ import { fetchPayments } from '@/actions/useractions'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const PaymentPage = ({ username }) => {
+    const router = useRouter();
     const { data: session } = useSession();
     const searchParams = useSearchParams();
     const [currUser, setCurrUser] = useState({});
@@ -21,11 +23,11 @@ const PaymentPage = ({ username }) => {
         getData();
     }, []);
 
-    useEffect(() => {
-        if (searchParams.get("paymentdone") === "true") {
-            toast("Payment has been made");
-        }
-    }, [searchParams]);
+    useEffect(()=>{
+        if(!session)
+        router.push("/");
+      },[router])
+    
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
