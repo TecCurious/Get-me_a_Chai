@@ -8,8 +8,8 @@ import GitHubProvider from 'next-auth/providers/github';
 const authOptions = NextAuth({
   providers: [
     GitHubProvider({
-      clientId: process.env.NEXT_PUBLIC_GITHUB_ID,
-      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET,
+      clientId: process.env.NEXT_PUBLIC_ID,
+      clientSecret: process.env.NEXT_PUBLIC_SECRET,
       // scope: 'read:user user:email',
     }),
   ],
