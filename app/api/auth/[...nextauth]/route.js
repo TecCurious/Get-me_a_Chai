@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import User from '@/models/User';
 import Payment from '@/models/Payment';
 import GitHubProvider from 'next-auth/providers/github';
-
+import ConnectDb from '@/components/ConnectDb';
 const authOptions = NextAuth({
   providers: [
     GitHubProvider({
@@ -18,12 +18,7 @@ const authOptions = NextAuth({
       if (account.provider === 'github') {
         console.log(profile);
         // Ensure MongoDB connection
-        await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URL, {
-          
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-        }).then(console.log("db connected")).catch((err)=>{console.log("some error", err); return false });
-
+        await ConnectDb();
         // Extract the email from the profile or emails array
         const email = profile.email || profile.email?.find(email => email.primary)?.email;
 
